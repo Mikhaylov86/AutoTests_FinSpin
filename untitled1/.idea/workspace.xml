@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="235ad14e-9255-492c-b9fc-ec9bddaf3798" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../sandbox/bild.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../sandbox/bild.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sandbox/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../sandbox/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-    </list>
+    <list default="true" id="235ad14e-9255-492c-b9fc-ec9bddaf3798" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
