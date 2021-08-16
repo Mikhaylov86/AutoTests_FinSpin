@@ -118,6 +118,24 @@ public class sendVerificationCode {
     }
 
     @Test
+    // Значение поля "isNewUser" заполненно неверно
+    public void sendVerificationCodeValueIsNewUserIsString() {
+        RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
+        Response response = RestAssured.given()
+                .headers("Content-Type", "application/json; charset=UTF-8")
+                .headers("request-date", "2005-08-15T15:52:01+00:00")
+                .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjdg")
+                .body("{\"phone\": \"9045497861\", \"isNewUser\": \"true\"}").
+                        when().post("/sendVerificationCode").
+                        then().statusCode(400).extract().response();
+        Assert.assertEquals(response.jsonPath().getString("message"), null);
+        Assert.assertEquals(response.jsonPath().getString("details.message"), "[Значение «Is New User» должно быть равно «1» или «0».]");
+        Assert.assertEquals(response.jsonPath().getString("details.path"), "[isNewUser]");
+
+        System.out.println("Значение поля \"isNewUser\" заполненно неверно:"+ response.jsonPath().getString("details.message"));
+    }
+
+    @Test
     //Стоит признак нового пользователя
     public void sendVerificationCodeIsNewUserTrue() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
