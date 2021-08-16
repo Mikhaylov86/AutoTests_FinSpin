@@ -8,14 +8,11 @@ public class MyFirstProgram {
         hello("world");
         hello("user");
 
-        Square s = new Square();
-        s.len = 5;
-        System.out.println("Площадь квадрата со стороной " + s.len + "=" + area(s));
+        Square s = new Square(5);
+        System.out.println("Площадь квадрата со стороной " + s.len + "=" + s.area());
 
-        Rectangle r = new Rectangle();
-        r.a = 2;
-        r.b = 3;
-        System.out.println("Площадь прямоугольника со сторонами:" + r.a + "и" + r.b + " = " + area(r));
+        Rectangle r = new Rectangle(2,3);
+        System.out.println("Площадь прямоугольника со сторонами:" + r.a + "и" + r.b + " = " + r.area());
 
 
         double d = 8.2;
@@ -26,14 +23,6 @@ public class MyFirstProgram {
 
     public static void hello(String somebody) {
         System.out.println("Hello, " + somebody + "!");
-    }
-
-    public static double area(Square s) {
-        return s.len * s.len;
-    }
-
-    public static int area(Rectangle r) {
-        return r.a * r.b;
     }
 
 }

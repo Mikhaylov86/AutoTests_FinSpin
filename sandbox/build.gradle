@@ -28,3 +28,31 @@ application {
     // Define the main class for the application.
     mainClass = 'sandbox.App'
 }
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation 'org.testng:testng:7.4.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-beta-4'
+
+    testImplementation 'io.rest-assured:rest-assured:4.3.3'
+    testImplementation 'io.rest-assured:json-path:4.3.3'
+    testImplementation 'io.rest-assured:xml-path:4.3.3'
+    testImplementation 'io.rest-assured:json-schema-validator:4.3.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    implementation 'junit:junit:4.13.2'
+    implementation 'org.postgresql:postgresql:42.2.23.jre7'
+    implementation 'org.json:json:20210307'
+
+}
+
+
+test {
+    useTestNG()
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
