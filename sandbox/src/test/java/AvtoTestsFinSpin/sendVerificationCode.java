@@ -100,6 +100,24 @@ public class sendVerificationCode {
 
 
     @Test
+    // Значение поля "phone" заполненно не строкой
+    public void sendVerificationCodeValuePhoneNotString() {
+        RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
+        Response response = RestAssured.given()
+                .headers("Content-Type", "application/json; charset=UTF-8")
+                .headers("request-date", "2005-08-15T15:52:01+00:00")
+                .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjdg")
+                .body("{\"phone\": 9045497861, \"isNewUser\": true}").
+                        when().post("/sendVerificationCode").
+                        then().statusCode(400).extract().response();
+        Assert.assertEquals(response.jsonPath().getString("message"), null);
+        Assert.assertEquals(response.jsonPath().getString("details.message"), "[Значение «Phone» должно быть строкой.]");
+        Assert.assertEquals(response.jsonPath().getString("details.path"), "[phone]");
+
+        System.out.println("Значение поля \"phone\" заполненно не строкой:"+ response.jsonPath().getString("details.message"));
+    }
+
+    @Test
     //Стоит признак нового пользователя
     public void sendVerificationCodeIsNewUserTrue() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
