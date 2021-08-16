@@ -82,21 +82,7 @@
       <recent name="ru.stqa.pft.sandbox" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.sendVerificationCode.sendVerificationCodeValuePhoneNotString">
-    <configuration name="AvtoTestsFinSpin in sandbox.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="sandbox.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="AvtoTestsFinSpin.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="AvtoTestsFinSpin" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.sendVerificationCode.sendVerificationCodeValueIsNewUserIsString">
     <configuration name="auth and 1 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sandbox.test" />
       <option name="TEST_OBJECT" value="pattern" />
@@ -139,6 +125,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="sendVerificationCode.sendVerificationCodeValueIsNewUserIsString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sandbox.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="AvtoTestsFinSpin.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="AvtoTestsFinSpin" />
+      <option name="MAIN_CLASS_NAME" value="AvtoTestsFinSpin.sendVerificationCode" />
+      <option name="METHOD_NAME" value="sendVerificationCodeValueIsNewUserIsString" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="sendVerificationCode.sendVerificationCodeValuePhoneNotString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sandbox.test" />
       <extension name="coverage">
@@ -157,11 +159,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.sendVerificationCode.sendVerificationCodeValueIsNewUserIsString" />
         <item itemvalue="JUnit.sendVerificationCode.sendVerificationCodeValuePhoneNotString" />
         <item itemvalue="JUnit.sendVerificationCode.sendVerificationCodeIsNewUserTrue" />
         <item itemvalue="JUnit.sendVerificationCode" />
         <item itemvalue="JUnit.auth and 1 more" />
-        <item itemvalue="JUnit.AvtoTestsFinSpin in sandbox.test" />
       </list>
     </recent_temporary>
   </component>
