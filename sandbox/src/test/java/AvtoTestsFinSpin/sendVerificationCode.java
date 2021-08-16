@@ -42,7 +42,6 @@ public class sendVerificationCode {
         System.out.println("Отправка запроса с ошибкой в токене: "+ response.jsonPath().getString("errors"));
     }
 
-
     @Test
     //Отправка запроса с ошибкой в теле (неправильный номер телефона)
     public void sendVerificationCodeValuePhoneIsNotCorrect() {
@@ -78,8 +77,6 @@ public class sendVerificationCode {
         System.out.println("Нет обязательного поля телефон: "+ response.jsonPath().getString("details.message"));
     }
 
-
-
     @Test
     //Стоит признак старого пользователя
     public void sendVerificationCodeIsNewUserFalse() {
@@ -97,7 +94,6 @@ public class sendVerificationCode {
 
         System.out.println("Стоит признак старого пользователя: "+ response.jsonPath().getString("details.message"));
     }
-
 
     @Test
     // Значение поля "phone" заполненно не строкой
