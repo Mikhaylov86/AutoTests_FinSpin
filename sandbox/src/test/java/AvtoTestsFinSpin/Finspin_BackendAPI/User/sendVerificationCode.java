@@ -1,4 +1,4 @@
-package AvtoTestsFinSpin;
+package AvtoTestsFinSpin.Finspin_BackendAPI.User;
 
 
 import io.restassured.RestAssured;
@@ -11,13 +11,21 @@ import org.junit.Test;
 
 public class sendVerificationCode {
 
+
+
+
+
+
+
+
+
     @Test
     //Отправка запроса с ошибкой в теле (Синтаксическая ошибка: лишняя запятая)
     public void sendVerificationCodeSyntaxError() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
                 .headers("Content-Type", ContentType.JSON)
-                .body("{\"phone\":\"9045497861\",").
+                .body("{\"phone\":\"2000000001\",").
                         when().post("/sendVerificationCode").
                         then().statusCode(400).extract().response();
         Assert.assertFalse(response.jsonPath().getString("errors").isEmpty());
@@ -34,7 +42,7 @@ public class sendVerificationCode {
                 .headers("Content-Type", "application/json; charset=UTF-8")
                 .headers("request-date", "2005-08-15T15:52:01+00:00")
                 .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjd")
-                .body("{\"phone\":\"9045497861\", \"isNewUser\": false}").
+                .body("{\"phone\":\"2000000001\", \"isNewUser\": false}").
                         when().post("/sendVerificationCode").
                         then().statusCode(500).extract().response();
         Assert.assertEquals(response.jsonPath().getString("errors"), "Bad Token");
@@ -50,7 +58,7 @@ public class sendVerificationCode {
                 .headers("Content-Type", "application/json; charset=UTF-8")
                 .headers("request-date", "2005-08-15T15:52:01+00:00")
                 .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjdg")
-                .body("{\"phone\":\"904549786\"}").
+                .body("{\"phone\":\"200000000\"}").
                         when().post("/sendVerificationCode").
                         then().statusCode(400).extract().response();
         Assert.assertEquals(response.jsonPath().getString("message"), null);
@@ -85,7 +93,7 @@ public class sendVerificationCode {
                 .headers("Content-Type", "application/json; charset=UTF-8")
                 .headers("request-date", "2005-08-15T15:52:01+00:00")
                 .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjdg")
-                .body("{\"phone\":\"9045497861\", \"isNewUser\": false}").
+                .body("{\"phone\":\"2000000001\", \"isNewUser\": false}").
                         when().post("/sendVerificationCode").
                         then().statusCode(400).extract().response();
         Assert.assertEquals(response.jsonPath().getString("message"), null);
@@ -95,6 +103,7 @@ public class sendVerificationCode {
         System.out.println("Стоит признак старого пользователя: "+ response.jsonPath().getString("details.message"));
     }
 
+
     @Test
     // Значение поля "phone" заполненно не строкой
     public void sendVerificationCodeValuePhoneNotString() {
@@ -103,7 +112,7 @@ public class sendVerificationCode {
                 .headers("Content-Type", "application/json; charset=UTF-8")
                 .headers("request-date", "2005-08-15T15:52:01+00:00")
                 .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjdg")
-                .body("{\"phone\": 9045497861, \"isNewUser\": true}").
+                .body("{\"phone\": 2000000001, \"isNewUser\": true}").
                         when().post("/sendVerificationCode").
                         then().statusCode(400).extract().response();
         Assert.assertEquals(response.jsonPath().getString("message"), null);
@@ -121,7 +130,7 @@ public class sendVerificationCode {
                 .headers("Content-Type", "application/json; charset=UTF-8")
                 .headers("request-date", "2005-08-15T15:52:01+00:00")
                 .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjdg")
-                .body("{\"phone\": \"9045497861\", \"isNewUser\": \"true\"}").
+                .body("{\"phone\": \"2000000001\", \"isNewUser\": \"true\"}").
                         when().post("/sendVerificationCode").
                         then().statusCode(400).extract().response();
         Assert.assertEquals(response.jsonPath().getString("message"), null);
@@ -131,6 +140,8 @@ public class sendVerificationCode {
         System.out.println("Значение поля \"isNewUser\" заполненно неверно:"+ response.jsonPath().getString("details.message"));
     }
 
+
+
     @Test
     //Стоит признак нового пользователя
     public void sendVerificationCodeIsNewUserTrue() {
@@ -139,7 +150,7 @@ public class sendVerificationCode {
                 .headers("Content-Type", "application/json; charset=UTF-8")
                 .headers("request-date", "2005-08-15T15:52:01+00:00")
                 .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjdg")
-                .body("{\"phone\":\"9045497861\", \"isNewUser\": true}").
+                .body("{\"phone\":\"2000000001\", \"isNewUser\": true}").
                         when().post("/sendVerificationCode").
                         then().statusCode(200).extract().response();
         Assert.assertEquals(response.jsonPath().getString("timeToLife"), "1200");
@@ -150,6 +161,23 @@ public class sendVerificationCode {
         System.out.println("Указанный телефон не найден в системе: smsWasSend:"+ response.jsonPath().getString("smsWasSend"));
     }
 
+    @Test
+    //Телефонный номер уже есть в системе
+    public void sendVerificationCodePhoneWasSistem() {
+        RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
+        Response response = RestAssured.given()
+                .headers("Content-Type", "application/json; charset=UTF-8")
+                .headers("request-date", "2005-08-15T15:52:01+00:00")
+                .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjdg")
+                .body("{\"phone\":\"9000000001\", \"isNewUser\": true}").
+                        when().post("/sendVerificationCode").
+                        then().statusCode(400).extract().response();
+        Assert.assertEquals(response.jsonPath().getString("message"), null);
+        Assert.assertEquals(response.jsonPath().getString("details.message"), "[Указанный телефон уже используется, вернитесь назад и нажмите кнопку “Войти” или введите новый/другой номер телефона.]");
+        Assert.assertEquals(response.jsonPath().getString("details.path"), "[phone]");
 
+
+        System.out.println("Телефонный номер уже есть в системе: "+ response.jsonPath().getString("details.message"));
+    }
 
 }

@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="708f690a-bc83-44ef-befa-fb0d492e616a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/sandbox/src/test/java/AvtoTestsFinSpin/sendVerificationCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/sandbox/src/test/java/AvtoTestsFinSpin/sendVerificationCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sandbox/src/test/java/AvtoTestsFinSpin/Finspin_BackendAPI/User/POST_auth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sandbox/src/test/java/AvtoTestsFinSpin/auth.java" beforeDir="false" afterPath="$PROJECT_DIR$/sandbox/src/test/java/AvtoTestsFinSpin/Finspin_BackendAPI/User/get_auth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sandbox/src/test/java/AvtoTestsFinSpin/sendVerificationCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/sandbox/src/test/java/AvtoTestsFinSpin/Finspin_BackendAPI/User/sendVerificationCode.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,79 +83,85 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="AvtoTestsFinSpin.Finspin_BackendAPI.User" />
       <recent name="ru.stqa.pft.sandbox" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.sendVerificationCode">
-    <configuration name="auth and 1 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager">
+    <configuration name="POST_auth.authOllFields" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sandbox.test" />
-      <option name="TEST_OBJECT" value="pattern" />
-      <patterns>
-        <pattern testClass="AvtoTestsFinSpin.auth" />
-        <pattern testClass="AvtoTestsFinSpin.sendVerificationCode" />
-      </patterns>
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="AvtoTestsFinSpin.Finspin_BackendAPI.User.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="AvtoTestsFinSpin.Finspin_BackendAPI.User" />
+      <option name="MAIN_CLASS_NAME" value="AvtoTestsFinSpin.Finspin_BackendAPI.User.POST_auth" />
+      <option name="METHOD_NAME" value="authOllFields" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="sendVerificationCode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="POST_auth.authOllFields2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sandbox.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="AvtoTestsFinSpin.*" />
+          <option name="PATTERN" value="AvtoTestsFinSpin.Finspin_BackendAPI.User.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="AvtoTestsFinSpin" />
-      <option name="MAIN_CLASS_NAME" value="AvtoTestsFinSpin.sendVerificationCode" />
+      <option name="PACKAGE_NAME" value="AvtoTestsFinSpin.Finspin_BackendAPI.User" />
+      <option name="MAIN_CLASS_NAME" value="AvtoTestsFinSpin.Finspin_BackendAPI.User.POST_auth" />
+      <option name="METHOD_NAME" value="authOllFields2" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="POST_auth.authTimezoneNotСorrect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sandbox.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="AvtoTestsFinSpin.Finspin_BackendAPI.User.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="AvtoTestsFinSpin.Finspin_BackendAPI.User" />
+      <option name="MAIN_CLASS_NAME" value="AvtoTestsFinSpin.Finspin_BackendAPI.User.POST_auth" />
+      <option name="METHOD_NAME" value="authTimezoneNotСorrect" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="auth_green_branch" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sandbox.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="AvtoTestsFinSpin.Finspin_BackendAPI.User.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="AvtoTestsFinSpin.Finspin_BackendAPI.User" />
+      <option name="MAIN_CLASS_NAME" value="AvtoTestsFinSpin.Finspin_BackendAPI.User.auth_green_branch" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="sendVerificationCode.sendVerificationCodeIsNewUserTrue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="auth_green_branch.auth" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sandbox.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="AvtoTestsFinSpin.*" />
+          <option name="PATTERN" value="AvtoTestsFinSpin.Finspin_BackendAPI.User.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="AvtoTestsFinSpin" />
-      <option name="MAIN_CLASS_NAME" value="AvtoTestsFinSpin.sendVerificationCode" />
-      <option name="METHOD_NAME" value="sendVerificationCodeIsNewUserTrue" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="sendVerificationCode.sendVerificationCodeValueIsNewUserIsString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="sandbox.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="AvtoTestsFinSpin.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="AvtoTestsFinSpin" />
-      <option name="MAIN_CLASS_NAME" value="AvtoTestsFinSpin.sendVerificationCode" />
-      <option name="METHOD_NAME" value="sendVerificationCodeValueIsNewUserIsString" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="sendVerificationCode.sendVerificationCodeValuePhoneNotString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="sandbox.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="AvtoTestsFinSpin.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="AvtoTestsFinSpin" />
-      <option name="MAIN_CLASS_NAME" value="AvtoTestsFinSpin.sendVerificationCode" />
-      <option name="METHOD_NAME" value="sendVerificationCodeValuePhoneNotString" />
+      <option name="PACKAGE_NAME" value="AvtoTestsFinSpin.Finspin_BackendAPI.User" />
+      <option name="MAIN_CLASS_NAME" value="AvtoTestsFinSpin.Finspin_BackendAPI.User.auth_green_branch" />
+      <option name="METHOD_NAME" value="auth" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -159,11 +169,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.sendVerificationCode" />
-        <item itemvalue="JUnit.sendVerificationCode.sendVerificationCodeValueIsNewUserIsString" />
-        <item itemvalue="JUnit.sendVerificationCode.sendVerificationCodeValuePhoneNotString" />
-        <item itemvalue="JUnit.sendVerificationCode.sendVerificationCodeIsNewUserTrue" />
-        <item itemvalue="JUnit.auth and 1 more" />
+        <item itemvalue="JUnit.auth_green_branch.auth" />
+        <item itemvalue="JUnit.auth_green_branch" />
+        <item itemvalue="JUnit.POST_auth.authOllFields" />
+        <item itemvalue="JUnit.POST_auth.authTimezoneNotСorrect" />
+        <item itemvalue="JUnit.POST_auth.authOllFields2" />
       </list>
     </recent_temporary>
   </component>
