@@ -2,16 +2,18 @@ package AvtoTestsFinSpin.Finspin_BackendAPI.User;
 
 
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import io.restassured.http.Cookie;
-import io.restassured.http.Cookies;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.junit.Test;
 
 
-public class POST_auth {
+public class POST_auth extends auth_green_branch{
 
+    String ContentType = "application/json; charset=UTF-8";
+    String requestDate = "2005-08-15T15:52:01+00:00";
+    String requestToken = "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjdg";
+    String cookieWithoutAuthorization = "_csrf-frontend=u6M91LPw_6KwYlCStQe1z36Y_3V6ZSGw; advanced-frontend=jmbagra6ahp6nvbkfloaunqak2";
+    String cookieWithAuthorization = "_csrf-frontend=DwCK8LVxNNifzdOmjLwwQCsKPdPOsg96; _identity-frontend=%5B1389606%2C%22hX01t82QvvPegqHbwBTsZXyd9Z7yvZYR%22%2C2592000%5D; advanced-frontend=jq22irqll1hu7u7nimj2jilvh0";
 
     public static String phone() {
         int a = (int) (Math.random() * 1000000000);
@@ -19,38 +21,56 @@ public class POST_auth {
         return b;
     }
 
+
+    public void auth(boolean processDataAgreement, boolean receiveInfoAgreement, boolean creditHistoryRequestAgreement, boolean usePersonalSignAgreement, String code, String host, String timezone, int statusCode) {
+
+        Response response = RestAssured.given()
+                .headers("Content-Type", ContentType)
+                .headers("Cookie", cookieWithoutAuthorization)
+                .body("{" +
+                        "\"processDataAgreement\": " + processDataAgreement + "," +
+                        "\"receiveInfoAgreement\": " + receiveInfoAgreement + "," +
+                        "\"creditHistoryRequestAgreement\": " + creditHistoryRequestAgreement + "," +
+                        "\"usePersonalSignAgreement\": " + usePersonalSignAgreement + "," +
+                        "\"code\":\"" + code + "\"," +
+                        "\"host\":\"" + host + "\"," +
+                        "\"timezone\":\"" + timezone + "\"" +
+                        "}").
+                        when().post("/auth").
+                        then().statusCode(statusCode).extract().response();
+        System.out.println("Авторизация прошла успешно");
+
+    }
+
     public void sendVerificationCode() {
 
         Response response = RestAssured.given()
-                .headers("Content-Type", "application/json; charset=UTF-8")
-                .headers("request-date", "2005-08-15T15:52:01+00:00")
-                .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjdg")
+                .headers("Content-Type", ContentType)
+                .headers("request-date", requestDate)
+                .headers("request-token", requestToken)
+                .headers("Cookie", cookieWithoutAuthorization)
                 .body("{\"phone\":\"" + phone() + "\", \"isNewUser\": true}").
                         when().post("/sendVerificationCode").
                         then().statusCode(200).extract().response();
-        Cookie cookie = response.getDetailedCookie("JSESSIONID");
         Assert.assertEquals(response.jsonPath().getString("timeToLife"), "1200");
         Assert.assertEquals(response.jsonPath().getString("canRepeatAfter"), "30");
         Assert.assertEquals(response.jsonPath().getString("isNewUser"), "true");
         Assert.assertEquals(response.jsonPath().getString("smsWasSend"), "true");
+
+        System.out.println("Код отправлен: " + response.jsonPath().getString("smsWasSend"));
     }
 
-
-    public void auth() {
-        RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
-
+    public void logOut() {
         Response response = RestAssured.given()
-                .headers("Content-Type", ContentType.JSON)
-                .body("{\"processDataAgreement\": true,\"receiveInfoAgreement\": true,\"creditHistoryRequestAgreement\": true,\"usePersonalSignAgreement\": true,\"code\": \"1111\",\"host\": \"test2.finspin.ru\",\"timezone\": \"+03:00\"}").
-                        when().post("/auth").
+                .headers("Content-Type", ContentType)
+                .headers("Cookie", cookieWithAuthorization).
+                        when().post("/logOut").
                         then().statusCode(200).extract().response();
+        Assert.assertEquals(response.jsonPath().getString("isAuth"), "false");
+        Assert.assertEquals(response.jsonPath().getString("logout"), "true");
 
-
-
+        System.out.println("Пользователь разлогирован: " + response.jsonPath().getString("logout"));
     }
-
-
-
 
 
     @Test
@@ -58,7 +78,7 @@ public class POST_auth {
     public void authSyntaxError() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", ContentType.JSON)
+                .headers("Content-Type", ContentType)
                 .body("{\"code\":\"1111\",").
                         when().post("/auth").
                         then().statusCode(400).extract().response();
@@ -68,13 +88,12 @@ public class POST_auth {
 
     }
 
-
     @Test
     //Отправка запроса без обязательного поля (code)
     public void authWithoutCode() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", ContentType.JSON)
+                .headers("Content-Type", ContentType)
                 .body("{\"processDataAgreement\": true, \"receiveInfoAgreement\": true, \"creditHistoryRequestAgreement\": true, \"usePersonalSignAgreement\": true, \"host\": \"test2.finspin.ru\", \"timezone\": \"+03:00\"}").
                         when().post("/auth").
                         then().statusCode(400).extract().response();
@@ -85,13 +104,12 @@ public class POST_auth {
 
     }
 
-
     @Test
     //Отправка запроса с неправильным типом в 1 поле (processDataAgreement)
     public void authProcessDataAgreementNotСorrect() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", ContentType.JSON)
+                .headers("Content-Type", ContentType)
                 .body("{\"processDataAgreement\": 1111, \"receiveInfoAgreement\": true, \"creditHistoryRequestAgreement\": true, \"usePersonalSignAgreement\": true, \"code\": \"1111\", \"host\": \"test2.finspin.ru\", \"timezone\": \"+03:00\"}").
                         when().post("/auth").
                         then().statusCode(400).extract().response();
@@ -107,7 +125,7 @@ public class POST_auth {
     public void authReceiveInfoAgreementNotСorrect() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", ContentType.JSON)
+                .headers("Content-Type", ContentType)
                 .body("{\"processDataAgreement\": true, \"receiveInfoAgreement\": \"true\", \"creditHistoryRequestAgreement\": true, \"usePersonalSignAgreement\": true, \"code\": \"1111\", \"host\": \"test2.finspin.ru\", \"timezone\": \"+03:00\"}").
                         when().post("/auth").
                         then().statusCode(400).extract().response();
@@ -123,7 +141,7 @@ public class POST_auth {
     public void authCreditHistoryRequestAgreementNotСorrect() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", ContentType.JSON)
+                .headers("Content-Type", ContentType)
                 .body("{\"processDataAgreement\": true, \"receiveInfoAgreement\": true, \"creditHistoryRequestAgreement\": \"fdgfgdf\", \"usePersonalSignAgreement\": true, \"code\": \"1111\", \"host\": \"test2.finspin.ru\", \"timezone\": \"+03:00\"}").
                         when().post("/auth").
                         then().statusCode(400).extract().response();
@@ -139,7 +157,7 @@ public class POST_auth {
     public void authUsePersonalSignAgreementNotСorrect() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", ContentType.JSON)
+                .headers("Content-Type", ContentType)
                 .body("{\"processDataAgreement\": true, \"receiveInfoAgreement\": true, \"creditHistoryRequestAgreement\": true, \"usePersonalSignAgreement\": \"23\", \"code\": \"1111\", \"host\": \"test2.finspin.ru\", \"timezone\": \"+03:00\"}").
                         when().post("/auth").
                         then().statusCode(400).extract().response();
@@ -155,7 +173,7 @@ public class POST_auth {
     public void authHostNotСorrect() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", ContentType.JSON)
+                .headers("Content-Type", ContentType)
                 .body("{\"processDataAgreement\": true, \"receiveInfoAgreement\": true, \"creditHistoryRequestAgreement\": true, \"usePersonalSignAgreement\": true, \"code\": \"1111\", \"host\": 1234, \"timezone\": \"+03:00\"}").
                         when().post("/auth").
                         then().statusCode(400).extract().response();
@@ -172,7 +190,7 @@ public class POST_auth {
     public void authTimezoneNotСorrect() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", ContentType.JSON)
+                .headers("Content-Type", ContentType)
                 .body("{\"processDataAgreement\": true, \"receiveInfoAgreement\": true, \"creditHistoryRequestAgreement\": true, \"usePersonalSignAgreement\": true, \"code\": \"1111\", \"host\": \"test2.finspin.ru\", \"timezone\": 12345}").
                         when().post("/auth").
                         then().statusCode(400).extract().response();
@@ -188,7 +206,7 @@ public class POST_auth {
     public void authHost2NotСorrect() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", ContentType.JSON)
+                .headers("Content-Type", ContentType)
                 .body("{\"processDataAgreement\": true, \"receiveInfoAgreement\": true, \"creditHistoryRequestAgreement\": true, \"usePersonalSignAgreement\": true, \"code\": \"1111\", \"host\": \"1234\", \"timezone\": \"+03:00\"}").
                         when().post("/auth").
                         then().statusCode(400).extract().response();
@@ -204,7 +222,7 @@ public class POST_auth {
     public void authTimezone2NotСorrect() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", ContentType.JSON)
+                .headers("Content-Type", ContentType)
                 .body("{\"processDataAgreement\": true, \"receiveInfoAgreement\": true, \"creditHistoryRequestAgreement\": true, \"usePersonalSignAgreement\": true, \"code\": \"1111\", \"host\": \"test2.finspin.ru\", \"timezone\": \"12345\"}").
                         when().post("/auth").
                         then().statusCode(400).extract().response();
@@ -217,45 +235,151 @@ public class POST_auth {
 
 
     @Test
-    //Отправка запроса со всеми полями (Код отправлен)
-    public void authOllFields() throws InterruptedException {
+    //Отправка запроса со всеми полями (Код перед этим не отправлен)
+    public void authNoSmsCode() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
-
         Response response = RestAssured.given()
-                .headers("Content-Type", "application/json; charset=UTF-8")
-                .headers("request-date", "2005-08-15T15:52:01+00:00")
-                .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjdg")
-                .headers("Cookie","_csrf-frontend=qAMKkfCGopQtu_mnffYcHYLwpGobHKbn; advanced-frontend=lrrgbu45gg5m0gpr2tue3jnqjg")
-                .body("{\"phone\":\"" + phone() + "\", \"isNewUser\": true}").
-                        when().post("/sendVerificationCode").
-                        then().statusCode(200).extract().response();
-
-        Assert.assertEquals(response.jsonPath().getString("timeToLife"), "1200");
-        Assert.assertEquals(response.jsonPath().getString("canRepeatAfter"), "30");
-        Assert.assertEquals(response.jsonPath().getString("isNewUser"), "true");
-        Assert.assertEquals(response.jsonPath().getString("smsWasSend"), "true");
-
-        Response response2 = RestAssured.given()
-                .headers("Content-Type", ContentType.JSON)
-                .headers("Cookie","_csrf-frontend=qAMKkfCGopQtu_mnffYcHYLwpGobHKbn; advanced-frontend=lrrgbu45gg5m0gpr2tue3jnqjg")
-                .body("{\"processDataAgreement\": true,\"receiveInfoAgreement\": true,\"creditHistoryRequestAgreement\": true,\"usePersonalSignAgreement\": true,\"code\": \"1111\",\"host\": \"test2.finspin.ru\",\"timezone\": \"+03:00\"}").
+                .headers("Content-Type", ContentType)
+                .body("{" +
+                        "\"processDataAgreement\": true, " +
+                        "\"receiveInfoAgreement\": true, " +
+                        "\"creditHistoryRequestAgreement\": true, " +
+                        "\"usePersonalSignAgreement\": true, " +
+                        "\"code\": \"1111\", " +
+                        "\"host\": \"test2.finspin.ru\", " +
+                        "\"timezone\": \"+03:00\"" +
+                        "}").
                         when().post("/auth").
-                        then().statusCode(200).extract().response();
-
-        Response response3 = RestAssured.given()
-                .headers("Content-Type", ContentType.JSON)
-                .headers("Cookie","_csrf-frontend=qAMKkfCGopQtu_mnffYcHYLwpGobHKbn; advanced-frontend=lrrgbu45gg5m0gpr2tue3jnqjg").
-                        when().post("/logOut").
-                        then().statusCode(200).extract().response();
-        Assert.assertEquals(response3.jsonPath().getString("isAuth"), false);
-        Assert.assertEquals(response3.jsonPath().getString("logout"), true);
-        Assert.assertEquals(response3.jsonPath().getString("id").length(), 7);
-
-
+                        then().statusCode(400).extract().response();
+        Assert.assertEquals(response.jsonPath().getString("message"), null);
+        Assert.assertEquals(response.jsonPath().getString("details.path"), "[code]");
+        Assert.assertEquals(response.jsonPath().getString("details.message"), "[Undefined session]");
+        System.out.println("Отправка запроса со всеми полями (Код перед этим не отправлен): " + response.jsonPath().getString("details.message"));
 
     }
 
 
+    @Test
+    //Отправка запроса со всеми полями (Код отправлен)
+    public void authOllFields1()  {
+        RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
+        sendVerificationCode();
+        auth(true, true, true, true, "1111", "test2.finspin.ru", "+03:00", 200);
+        logOut();
+    }
+
+    //TODO добавить тест с отправкой только 1 обязательнго поля code (сейчас не получается т.к. просит еще 1 поле ХОСТ. выдает ошибку "errors": "Array to string conversion"
+
+
+    @Test
+    //TODO почему 500 ошибка выскакивает? и сообщение "errors": "Array to string conversion" ,  задать вопрос разработчикам
+    //Отправка запроса со всеми полями (Код отправлен)
+    public void authOllFields2()  {
+        RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
+        sendVerificationCode();
+        auth(false, true, true, true, "1111", "test2.finspin.ru", "+03:00", 200);
+        logOut();
+    }
+
+
+    @Test
+    //TODO почему 500 ошибка выскакивает? и сообщение "errors": "Array to string conversion" ,  задать вопрос разработчикам
+    //Отправка запроса со всеми полями (Код отправлен)
+    public void authOllFields3()  {
+        RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
+        sendVerificationCode();
+        auth(true, false, true, true, "1111", "test2.finspin.ru", "+03:00", 200);
+        logOut();
+    }
+
+
+    @Test
+    //TODO почему 500 ошибка выскакивает? и сообщение "errors": "Array to string conversion" ,  задать вопрос разработчикам
+    //Отправка запроса со всеми полями (Код отправлен)
+    public void authOllFields4(){
+        RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
+        sendVerificationCode();
+        auth(true, true, false, true, "1111", "test2.finspin.ru", "+03:00", 200);
+        logOut();
+    }
+
+    @Test
+    //TODO почему 500 ошибка выскакивает? и сообщение "errors": "Array to string conversion" ,  задать вопрос разработчикам
+    //Отправка запроса со всеми полями (Код отправлен)
+    public void authOllFields5()  {
+        RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
+        sendVerificationCode();
+        auth(true, true, true, false, "1111", "test2.finspin.ru", "+03:00", 200);
+        logOut();
+    }
+
+    @Test
+    //TODO почему 500 ошибка выскакивает? и сообщение "errors": "Array to string conversion" ,  задать вопрос разработчикам
+    //Отправка запроса со всеми полями (Код отправлен)
+    public void authOllFields6()  {
+        RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
+        sendVerificationCode();
+        auth(false, false, false, false, "1111", "test2.finspin.ru", "+03:00", 200);
+        logOut();
+    }
+
+    @Test
+    //Отправка запроса с неправильным кодом (Код отправлен)
+    public void authSmsCodeNotTrue()  {
+        RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
+        sendVerificationCode();
+
+        Response response = RestAssured.given()
+                .headers("Content-Type", ContentType)
+                .headers("request-date", requestDate)
+                .headers("request-token", requestToken)
+                .headers("Cookie", cookieWithoutAuthorization)
+                .body("{" +
+                        "\"processDataAgreement\": true, " +
+                        "\"receiveInfoAgreement\": true, " +
+                        "\"creditHistoryRequestAgreement\": true, " +
+                        "\"usePersonalSignAgreement\": true, " +
+                        "\"code\": \"1112\", " +
+                        "\"host\": \"test2.finspin.ru\", " +
+                        "\"timezone\": \"+03:00\"" +
+                        "}").
+                        when().post("/auth").
+                        then().statusCode(400).extract().response();
+        Assert.assertEquals(response.jsonPath().getString("message"), null);
+        Assert.assertEquals(response.jsonPath().getString("details.path"), "[code]");
+        Assert.assertEquals(response.jsonPath().getString("details.message"), "[Неверное значение кода верификации.]");
+        System.out.println("Отправка запроса с неправильным кодом: " + response.jsonPath().getString("details.message"));
+
+    }
+
+    @Test
+    //Отправка запроса с неправильным кодом - не строкой (Код отправлен)
+    public void authSmsCodeNotString()  {
+        RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
+        sendVerificationCode();
+
+        Response response = RestAssured.given()
+                .headers("Content-Type", ContentType)
+                .headers("request-date", requestDate)
+                .headers("request-token", requestToken)
+                .headers("Cookie", cookieWithoutAuthorization)
+                .body("{" +
+                        "\"processDataAgreement\": true, " +
+                        "\"receiveInfoAgreement\": true, " +
+                        "\"creditHistoryRequestAgreement\": true, " +
+                        "\"usePersonalSignAgreement\": true, " +
+                        "\"code\": 1112, " +
+                        "\"host\": \"test2.finspin.ru\", " +
+                        "\"timezone\": \"+03:00\"" +
+                        "}").
+                        when().post("/auth").
+                        then().statusCode(400).extract().response();
+        Assert.assertEquals(response.jsonPath().getString("message"), null);
+        Assert.assertEquals(response.jsonPath().getString("details.path"), "[code]");
+        Assert.assertEquals(response.jsonPath().getString("details.message"), "[Значение «Code» должно быть строкой.]");
+        System.out.println("Отправка запроса с неправильным кодом - не строкой: " + response.jsonPath().getString("details.message"));
+
+    }
 
 
 

@@ -5,26 +5,17 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.Assert;
-import org.testng.annotations.*;
 import org.junit.Test;
 
 
-public class sendVerificationCode {
-
-
-
-
-
-
-
-
+public class POST_sendVerificationCode extends auth_green_branch{
 
     @Test
     //Отправка запроса с ошибкой в теле (Синтаксическая ошибка: лишняя запятая)
     public void sendVerificationCodeSyntaxError() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", ContentType.JSON)
+                .headers("Content-Type", ContentType)
                 .body("{\"phone\":\"2000000001\",").
                         when().post("/sendVerificationCode").
                         then().statusCode(400).extract().response();
@@ -39,8 +30,8 @@ public class sendVerificationCode {
     public void sendVerificationCodeBadToken() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", "application/json; charset=UTF-8")
-                .headers("request-date", "2005-08-15T15:52:01+00:00")
+                .headers("Content-Type", ContentType)
+                .headers("request-date", requestDate)
                 .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjd")
                 .body("{\"phone\":\"2000000001\", \"isNewUser\": false}").
                         when().post("/sendVerificationCode").
@@ -55,9 +46,9 @@ public class sendVerificationCode {
     public void sendVerificationCodeValuePhoneIsNotCorrect() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", "application/json; charset=UTF-8")
-                .headers("request-date", "2005-08-15T15:52:01+00:00")
-                .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjdg")
+                .headers("Content-Type", ContentType)
+                .headers("request-date", requestDate)
+                .headers("request-token", requestToken)
                 .body("{\"phone\":\"200000000\"}").
                         when().post("/sendVerificationCode").
                         then().statusCode(400).extract().response();
@@ -73,9 +64,9 @@ public class sendVerificationCode {
     public void sendVerificationCodeNoPhone() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", "application/json; charset=UTF-8")
-                .headers("request-date", "2005-08-15T15:52:01+00:00")
-                .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjdg").
+                .headers("Content-Type", ContentType)
+                .headers("request-date", requestDate)
+                .headers("request-token", requestToken).
                         when().post("/sendVerificationCode").
                         then().statusCode(400).extract().response();
         Assert.assertEquals(response.jsonPath().getString("message"), null);
@@ -90,9 +81,9 @@ public class sendVerificationCode {
     public void sendVerificationCodeIsNewUserFalse() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", "application/json; charset=UTF-8")
-                .headers("request-date", "2005-08-15T15:52:01+00:00")
-                .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjdg")
+                .headers("Content-Type", ContentType)
+                .headers("request-date", requestDate)
+                .headers("request-token", requestToken)
                 .body("{\"phone\":\"2000000001\", \"isNewUser\": false}").
                         when().post("/sendVerificationCode").
                         then().statusCode(400).extract().response();
@@ -109,9 +100,9 @@ public class sendVerificationCode {
     public void sendVerificationCodeValuePhoneNotString() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", "application/json; charset=UTF-8")
-                .headers("request-date", "2005-08-15T15:52:01+00:00")
-                .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjdg")
+                .headers("Content-Type", ContentType)
+                .headers("request-date", requestDate)
+                .headers("request-token", requestToken)
                 .body("{\"phone\": 2000000001, \"isNewUser\": true}").
                         when().post("/sendVerificationCode").
                         then().statusCode(400).extract().response();
@@ -127,9 +118,9 @@ public class sendVerificationCode {
     public void sendVerificationCodeValueIsNewUserIsString() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", "application/json; charset=UTF-8")
-                .headers("request-date", "2005-08-15T15:52:01+00:00")
-                .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjdg")
+                .headers("Content-Type", ContentType)
+                .headers("request-date", requestDate)
+                .headers("request-token", requestToken)
                 .body("{\"phone\": \"2000000001\", \"isNewUser\": \"true\"}").
                         when().post("/sendVerificationCode").
                         then().statusCode(400).extract().response();
@@ -147,9 +138,9 @@ public class sendVerificationCode {
     public void sendVerificationCodeIsNewUserTrue() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", "application/json; charset=UTF-8")
-                .headers("request-date", "2005-08-15T15:52:01+00:00")
-                .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjdg")
+                .headers("Content-Type", ContentType)
+                .headers("request-date", requestDate)
+                .headers("request-token", requestToken)
                 .body("{\"phone\":\"2000000001\", \"isNewUser\": true}").
                         when().post("/sendVerificationCode").
                         then().statusCode(200).extract().response();
@@ -166,9 +157,9 @@ public class sendVerificationCode {
     public void sendVerificationCodePhoneWasSistem() {
         RestAssured.baseURI = "https://api.test2.finspin.ru/v3";
         Response response = RestAssured.given()
-                .headers("Content-Type", "application/json; charset=UTF-8")
-                .headers("request-date", "2005-08-15T15:52:01+00:00")
-                .headers("request-token", "mjawns0woc0xnvqxnto1mjowmsswmdowmdgyruywourcn0jfn0y3mjm2rknentneney3qji2qjdg")
+                .headers("Content-Type", ContentType)
+                .headers("request-date", requestDate)
+                .headers("request-token", requestToken)
                 .body("{\"phone\":\"9000000001\", \"isNewUser\": true}").
                         when().post("/sendVerificationCode").
                         then().statusCode(400).extract().response();
