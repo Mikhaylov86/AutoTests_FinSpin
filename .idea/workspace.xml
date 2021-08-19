@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="708f690a-bc83-44ef-befa-fb0d492e616a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/sandbox/src/test/java/AvtoTestsFinSpin/Finspin_BackendAPI/User/GET_authStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sandbox/src/test/java/AvtoTestsFinSpin/Finspin_BackendAPI/User/POST_logOut.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sandbox/src/test/java/AvtoTestsFinSpin/Finspin_BackendAPI/User/GET_user.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sandbox/src/test/java/AvtoTestsFinSpin/Finspin_BackendAPI/User/POST_auth.java" beforeDir="false" afterPath="$PROJECT_DIR$/sandbox/src/test/java/AvtoTestsFinSpin/Finspin_BackendAPI/User/POST_auth.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sandbox/src/test/java/AvtoTestsFinSpin/Finspin_BackendAPI/User/auth_green_branch.java" beforeDir="false" afterPath="$PROJECT_DIR$/sandbox/src/test/java/AvtoTestsFinSpin/Finspin_BackendAPI/User/auth_green_branch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sandbox/src/test/java/AvtoTestsFinSpin/Finspin_BackendAPI/User/sendVerificationCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/sandbox/src/test/java/AvtoTestsFinSpin/Finspin_BackendAPI/User/POST_sendVerificationCode.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +84,7 @@
       <recent name="ru.stqa.pft.sandbox" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GET_authStatus.authStatusAuthUser">
+  <component name="RunManager" selected="JUnit.GET_user.userWithAuthorization">
     <configuration name="GET_authStatus" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sandbox.test" />
       <extension name="coverage">
@@ -120,6 +116,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GET_user.userWithAuthorization" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sandbox.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="AvtoTestsFinSpin.Finspin_BackendAPI.User.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="AvtoTestsFinSpin.Finspin_BackendAPI.User" />
+      <option name="MAIN_CLASS_NAME" value="AvtoTestsFinSpin.Finspin_BackendAPI.User.GET_user" />
+      <option name="METHOD_NAME" value="userWithAuthorization" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GET_user.userWithoutAuthorization" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sandbox.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="AvtoTestsFinSpin.Finspin_BackendAPI.User.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="AvtoTestsFinSpin.Finspin_BackendAPI.User" />
+      <option name="MAIN_CLASS_NAME" value="AvtoTestsFinSpin.Finspin_BackendAPI.User.GET_user" />
+      <option name="METHOD_NAME" value="userWithoutAuthorization" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="POST_auth" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sandbox.test" />
       <extension name="coverage">
@@ -135,43 +163,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="POST_logOut" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="sandbox.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="AvtoTestsFinSpin.Finspin_BackendAPI.User.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="AvtoTestsFinSpin.Finspin_BackendAPI.User" />
-      <option name="MAIN_CLASS_NAME" value="AvtoTestsFinSpin.Finspin_BackendAPI.User.POST_logOut" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="POST_sendVerificationCode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="sandbox.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="AvtoTestsFinSpin.Finspin_BackendAPI.User.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="AvtoTestsFinSpin.Finspin_BackendAPI.User" />
-      <option name="MAIN_CLASS_NAME" value="AvtoTestsFinSpin.Finspin_BackendAPI.User.POST_sendVerificationCode" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GET_user.userWithAuthorization" />
+        <item itemvalue="JUnit.GET_user.userWithoutAuthorization" />
         <item itemvalue="JUnit.GET_authStatus.authStatusAuthUser" />
         <item itemvalue="JUnit.GET_authStatus" />
         <item itemvalue="JUnit.POST_auth" />
-        <item itemvalue="JUnit.POST_logOut" />
-        <item itemvalue="JUnit.POST_sendVerificationCode" />
       </list>
     </recent_temporary>
   </component>
